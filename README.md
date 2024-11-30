@@ -16,7 +16,7 @@ To run the application, ensure the following database schema and data are proper
 1. **Clone the Repository**
    - Clone this repository to your local system:
      ```bash
-     git clone <repository-url>
+     git clone https://github.com/OMPATEL20/ENSF--614--ACMEPLEX.git
      ```
 
 2. **Setup the Database**
