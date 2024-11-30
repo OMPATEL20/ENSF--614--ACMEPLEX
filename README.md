@@ -1,4 +1,4 @@
-# Movie Theater Management Application
+# Movie Theater Management Application-ACMEPLEX
 
 ## Description
 This is a **Spring Boot Movie Theater Management Application- Acmeplex** that enables users to browse movies, view theater details, and make bookings, make payment and get ticket and receipt confimation. It uses a MySQL database for data persistence.
