@@ -178,7 +178,7 @@
             <h1 style="margin: 0; font-size: 1.5rem;">Movie Reservation</h1>
             <form th:action="@{/logout}" method="post" class="mb-0">
                 <button type="submit" class="btn btn-outline-light" style="border-color: #fff; color: #fff;">Logout</button>
-				<button type="button" class="btn btn-warning" onclick="cancelTicket()">Cancel Ticket</button>
+				<button type="button" class="btn btn-warning" onclick="redirectToCancelForm()">Cancel Ticket</button>
             </form>
         </div>
     </header>
@@ -349,54 +349,22 @@
 
 
 
-		
 		function redirectToCancelForm() {
-		    const theater = document.getElementById('theaterSelect')?.value;
-			const movieText = document.getElementById('movieSelect').value; 
-			//	const movie = document.getElementById('movieInput').value; 
-			// const movie = document.getElementById('movie')?.value; 
-		    const showTime = document.getElementById('showTime')?.value;
-		    const selectedSeats = [...document.querySelectorAll('.seat.selected')]
-		        .map(seat => seat.textContent)
-		        .join(',');
+				    // const theater = document.getElementById('theaterSelect').value;
+				    // const movie = document.getElementById('movie').value;
+				    // const showTime = document.getElementById('showTime').value;
+				    // const selectedSeats = [...document.querySelectorAll('.seat.selected')].map(seat => seat.textContent).join(',');
 
-		    // Debugging logs
-		    console.log('Theater:', theater);
-		    console.log('Movie:', movieText);
-		    console.log('ShowTime:', showTime);
-		    console.log('Selected Seats:', selectedSeats);
+				    // if (!theater || !movie || !showTime || !selectedSeats) {
+				    //     alert('Please complete all selections before proceeding.');
+				    //     return;
+				    // }
 
-		    if (!theater || !movieText || !showTime || !selectedSeats) {
-		        alert('Please complete all selections before proceeding.');
-		        return;
-		    }
+				    // const url = `/CancelForm?theater=${encodeURIComponent(theater)}&movie=${encodeURIComponent(movie)}&showTime=${encodeURIComponent(showTime)}&selectedSeats=${encodeURIComponent(selectedSeats)}`;
+		            const url = `/CancelForm`;
 
-		    const payload = { theater, movieText, showTime, selectedSeats };
-
-		   fetch('/cancel', {
-		        method: 'POST',
-		        headers: { 'Content-Type': 'application/json' },
-		        body: JSON.stringify(payload),
-		    })
-		        .then(response => {
-		            if (response.ok) {
-		                alert('Tickets canceled successfully!');
-		                document.querySelectorAll('.seat.selected').forEach(seat => {
-		                    seat.classList.remove('booked');
-		                    seat.classList.add('available');
-		                    seat.classList.remove('selected');
-		                });
-		            } else {
-		                response.json().then(data => console.error('API Error:', data));
-		                alert('Failed to cancel tickets. Please try again.');
-		            }
-		        })
-		        .catch(error => {
-		            console.error('Fetch Error:', error);
-		            alert('An error occurred while canceling tickets.');
-		        });
-		}
-
+				    window.location.href = url;
+				}
 
 		
 		
