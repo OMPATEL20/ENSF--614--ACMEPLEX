@@ -1,5 +1,6 @@
 package com.acmeplex.controller;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,9 +62,19 @@ public class SeatController {
     }
 
     @PostMapping("/deletePayment")
-    public String deletePayment(@RequestParam Long paymentId, @RequestParam String email, Model model) {
-        // Delete the payment using the paymentId
+    public String deletePayment(@RequestParam Long paymentId, @RequestParam String email, @RequestParam String selectedSeats, Model model) {
+        // Delete the payment using the paymentId   
+
         paymentService.deletePayment(paymentId);
+
+        List<Seat> seats = seatService.transformSelectedSeats(selectedSeats);
+
+        for (Seat seat : seats) {
+            System.out.println("Processing Seat: Row " + seat.getRow() + ", Number " + seat.getNumber());
+            Seat seat_data = new Seat(seat.getRow(), seat.getNumber(), false, email);
+            System.out.println("here seat_data:" + seat_data);
+            seatService.deleteSeat(email, seat.getRow(), seat.getNumber());
+        }
 
         // Fetch updated tickets for the user
         Map<String, Object> result = ticketcancelService.getUserTickets(email);

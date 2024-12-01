@@ -119,6 +119,7 @@
                             <form th:action="@{/deletePayment}" method="post">
                                 <input type="hidden" name="paymentId" th:value="${payment.id}" />
                                 <input type="hidden" name="email" th:value="${payment.email}" />
+                                <input type="hidden" name="selectedSeats" th:value="${payment.selectedSeats}" />
                                 <button type="submit">Delete</button>
                             </form>
                         </td>

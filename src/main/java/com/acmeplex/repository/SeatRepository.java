@@ -56,9 +56,9 @@ public class SeatRepository {
     }
 
     // Delete a seat
-    public void deleteSeat(int seatId) {
-        String sql = "DELETE FROM seats WHERE id = ?";
-        jdbcTemplate.update(sql, seatId);
+    public void deleteSeat(String userEmail, int rowNum, int seatNum) {
+        String sql = "DELETE FROM seats WHERE user_email = ? AND rowNum = ? AND seatNum = ?";
+        jdbcTemplate.update(sql, userEmail, rowNum, seatNum);
     }
 
     // Map ResultSet to Seat object

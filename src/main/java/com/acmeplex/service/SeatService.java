@@ -40,8 +40,8 @@ public class SeatService {
     }
 
     // Delete a seat
-    public void deleteSeat(int seatId) {
-        seatRepository.deleteSeat(seatId);
+    public void deleteSeat(String userEmail, int rowNum, int seatNum) {
+        seatRepository.deleteSeat(userEmail, rowNum, seatNum);
     }
 
     public Map<Integer, List<Seat>> generateSeatMap(String user_email) {

@@ -75,7 +75,7 @@ public class PaymentController {
 
     for (Seat seat : seats) {
       System.out.println("Processing Seat: Row " + seat.getRow() + ", Number " + seat.getNumber());
-      Seat seat_data = new Seat(seat.getRow(), seat.getNumber(), false);
+      Seat seat_data = new Seat(seat.getRow(), seat.getNumber(), false, email);
       System.out.println("seat_data:" + seat_data);
       seatService.addSeat(seat_data);
     }
