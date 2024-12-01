@@ -1,4 +1,4 @@
-package com.om.app.Controller;
+package com.acmeplex.controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ErrorControl implements ErrorController {
-//	@RequestMapping(path="/error", method = RequestMethod.POST)
-//    public String handleError() {
-//        return "error";
-//    }
+	// @RequestMapping(path="/error", method = RequestMethod.POST)
+	// public String handleError() {
+	// return "error";
+	// }
 	@GetMapping(value = "/error")
 	public String handleError(HttpServletRequest request) {
 
@@ -30,12 +30,6 @@ public class ErrorControl implements ErrorController {
 			}
 		}
 		return "error";
-	}
-
-	@Override
-	public String getErrorPath() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
