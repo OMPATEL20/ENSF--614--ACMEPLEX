@@ -10,10 +10,19 @@
             <h4 class="alert-heading">Payment Successful!</h4>
             <p th:text="${successMessage}"></p>
             <hr>
-			<button type="button" class="btn btn-warning" onclick="cancelTicket()">Cancel Ticket</button>
+            <button type="button" class="btn btn-danger" id="cancelButton" onclick="redirectToCancelForm()">Cancel Ticket</button>
 
             <a href="/" class="btn btn-primary">Back to Home</a>
         </div>
     </div>
+<script>
+        function redirectToCancelForm() {
+        const url = `/CancelForm`;
+
+            window.location.href = url;
+        }
+
+    
+</script>
 </body>
 </html>
