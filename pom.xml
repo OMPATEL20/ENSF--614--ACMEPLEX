@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Acmeplex</name>
 	<description> project for Spring Boot-614</description>
+		<packaging>jar</packaging>
 	<url/>
 	<licenses>
 		<license/>
