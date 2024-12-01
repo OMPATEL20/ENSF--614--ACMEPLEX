@@ -3,6 +3,7 @@ package com.acmeplex.controller;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import com.acmeplex.model.Seat;
 import com.acmeplex.service.EmailService;
 import com.acmeplex.service.PaymentService;
 import com.acmeplex.service.SeatService;
+import com.acmeplex.service.TicketcancelService;
 
 	   @Controller
 	   public class PaymentController {
@@ -29,6 +31,52 @@ import com.acmeplex.service.SeatService;
 	       @Autowired
 	       private SeatService seatService;
 
+
+	          @Autowired
+	          private TicketcancelService ticketcancelService;
+
+	    @GetMapping("/CancelForm")
+	    public String cancelForm(){
+	      return "CancelForm";
+	    }
+	    
+	    @GetMapping("/confirmCancellation")
+	    public String Confirm(){
+	      return "CancelConfirmation";
+	    }
+	    @PostMapping("/processCancel")
+	    public String processCancelTicket(@RequestParam String email, Model model) {
+	        // Call service to cancel tickets
+	        Map<String, Object> result = ticketcancelService.getUserTickets(email);
+
+	        // Add result to model for display
+	        model.addAttribute("payments", result.get("payments"));
+	        model.addAttribute("seats", result.get("seats"));
+
+	        // Return the same page
+	        return "CancelForm";
+	    }
+
+	    @PostMapping("/deletePayment")
+	    public String deletePayment(@RequestParam Long paymentId, @RequestParam String email, Model model) {
+	        // Delete the payment using the paymentId
+	        paymentService.deletePayment(paymentId);
+
+	        // Fetch updated tickets for the user
+	        Map<String, Object> result = ticketcancelService.getUserTickets(email);
+	        model.addAttribute("payments", result.get("payments"));
+	        model.addAttribute("seats", result.get("seats"));
+
+	        
+
+	        // Reload the cancel-ticket page
+	        return "cancelForm";
+	    }
+	       
+	       
+	       
+	       
+	       
    @GetMapping("/PurchaseForm")
 	   public String getPurchaseForm(
        @RequestParam String theater,
